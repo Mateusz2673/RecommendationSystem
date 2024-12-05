@@ -7,15 +7,14 @@ from movie_app.models import Movies
 # Create your models here.
 class Reviews(models.Model):
     review_id = models.AutoField(primary_key=True)
-    movie = models.ForeignKey(Movies, models.DO_NOTHING)
-    user = models.ForeignKey(Users, models.DO_NOTHING)
+    movie = models.ForeignKey(Movies, models.DO_NOTHING, null=True, blank=True)
+    user = models.ForeignKey(Users, models.DO_NOTHING, null=True, blank=True)
     rating = models.IntegerField()
     review_date = models.DateTimeField(auto_now=True)
     review_text = models.TextField(blank=True, null=True)
 
 
     class Meta:
-        managed = False
         db_table = 'reviews'
 
     def get_star_rating(self):
@@ -79,12 +78,11 @@ class Reviews(models.Model):
 
 class Moviecomments(models.Model):
     comment_id = models.AutoField(primary_key=True)
-    review = models.ForeignKey(Reviews, models.DO_NOTHING)
-    user = models.ForeignKey(Users, models.DO_NOTHING)
+    review = models.ForeignKey(Reviews, models.DO_NOTHING, null=True, blank=True)
+    user = models.ForeignKey(Users, models.DO_NOTHING, null=True, blank=True)
     comment_text = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'moviecomments'
 
     def __str__(self):

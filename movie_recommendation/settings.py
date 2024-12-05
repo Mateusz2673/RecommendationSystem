@@ -79,7 +79,7 @@ DATABASES = {
         'NAME': 'movie_recommendation_database',
         'USER': 'postgres',
         'PASSWORD': 'ChlopakiTab',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }

@@ -29,9 +29,11 @@ class Users(AbstractBaseUser, PermissionsMixin):
     salt = models.BinaryField()
     display_name = models.TextField()
     user_role = models.CharField(default='user')
-    email = models.TextField()
-    first_name = models.TextField()
-    surname = models.TextField()
+    email = models.TextField(null=True, blank=True)
+    first_name = models.TextField(null=True, blank=True)
+    surname = models.TextField(null=True, blank=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'login'
     REQUIRED_FIELDS = []
@@ -39,7 +41,6 @@ class Users(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     class Meta:
-        managed = False
         db_table = 'users'
 
     def __str__(self):
@@ -53,19 +54,11 @@ class Users(AbstractBaseUser, PermissionsMixin):
     def is_authenticated(self):
         return True
 
-    @property
-    def is_staff(self):
-        return self.user_role == 'admin'
-
-    @property
-    def is_superuser(self):
-        return self.user_role == 'admin'
 
     @property
     def password(self):
         return bytes(self.password_hash).decode()
 
-    @password.setter
     def set_password(self, raw_password):
         hashed_password = make_password(raw_password)
         self.password_hash = hashed_password.encode()
@@ -144,9 +137,8 @@ class Users(AbstractBaseUser, PermissionsMixin):
 
 class Favouritemovies(models.Model):
     favourite_id = models.AutoField(primary_key=True)
-    movie = models.ForeignKey(Movies, models.DO_NOTHING)
-    user = models.ForeignKey(Users, models.DO_NOTHING)
+    movie = models.ForeignKey(Movies, models.DO_NOTHING, null=True, blank=True)
+    user = models.ForeignKey(Users, models.DO_NOTHING, null=True, blank=True)
 
     class Meta:
-        managed = False
         db_table = 'favouritemovies'
