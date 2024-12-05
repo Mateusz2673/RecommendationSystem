@@ -79,7 +79,7 @@ DATABASES = {
         'NAME': 'movie_recommendation_database',
         'USER': 'postgres',
         'PASSWORD': 'ChlopakiTab',
-        'HOST': 'db',
+        'HOST': '127.0.0.1', #db (docker)
         'PORT': '5432',
     }
 }

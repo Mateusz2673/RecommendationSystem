@@ -5,7 +5,7 @@
 -- Dumped from database version 16.3
 -- Dumped by pg_dump version 16.3
 
--- Started on 2024-12-05 18:46:04
+-- Started on 2024-12-05 18:45:15
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -16086,7 +16086,7 @@ ALTER TABLE ONLY public.reviews
     ADD CONSTRAINT fk_reviews_user_id FOREIGN KEY (user_id) REFERENCES public.users(user_id);
 
 
--- Completed on 2024-12-05 18:46:05
+-- Completed on 2024-12-05 18:45:16
 
 --
 -- PostgreSQL database dump complete
