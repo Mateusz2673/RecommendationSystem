@@ -74,6 +74,37 @@ About
                 {% endfor %}
             </div>
         </section>
+         <section class="recommendation-algorithm">
+            <h3>Choose Recommendation Algorithm</h3>
+            <form method="POST" action="{% url 'home' %}">
+                {% csrf_token %}
+                <label>
+                    <input type="checkbox" name="use_content" value="1" checked>
+                    Content-Based Filtering
+                </label>
+                <br>
+                <label>
+                    <input type="checkbox" name="use_collaborative" value="1" checked>
+                    Collaborative Filtering
+                </label>
+                <br>
+                <button type="submit">Get Recommendations</button>
+            </form>
+        </section>
+
+        <section class="recommendations-section">
+            <h3>Recommended Movies</h3>
+            <div class="recommendations-grid">
+                {% for movie in recommended_movies %}
+                <div class="recommendation-item">
+                    <h4>{{ movie.title }}</h4>
+                    <p>Rating: {{ movie.rating }}</p>
+                    <p>Genre: {{ movie.genre }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
 
     </div>
 </main>
